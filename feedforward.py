@@ -30,7 +30,7 @@ class Feedforward:
         
         return weights, biases
      
-     # define forward pass
+     #define forward pass
      def forward(self, x):
           layer_outputs = [x]
           for i in range(self.num_layers):
@@ -40,3 +40,8 @@ class Feedforward:
           output = softmax(np.dot(x, self.weights[-1]) + self.biases[-1])
           layer_outputs.append(output)
           return layer_outputs
+     
+     #predict final output y^
+     def predict(self, x):
+         layer_output = self.forward(x)
+         return layer_output[-1]
