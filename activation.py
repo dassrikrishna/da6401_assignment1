@@ -34,7 +34,7 @@ def softmax(x):
     return exp_x / np.sum(exp_x, axis=1, keepdims=True)
 
 
-function_functions = {
+activation_functions = {
     "identity": (identity, identity_derivative),
     "sigmoid": (sigmoid, sigmoid_derivative),
     "tanh": (tanh, tanh_derivative),
