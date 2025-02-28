@@ -15,4 +15,4 @@ for i in range(10):
     axes[i].set_title(class_names[i])
     axes[i].imshow(x_train[index])
 
-plt.show()  
+plt.show()
