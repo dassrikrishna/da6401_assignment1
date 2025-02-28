@@ -29,3 +29,15 @@ class Feedforward:
             biases.append(bias_vector)
         
         return weights, biases
+     
+     # define forward pass
+     def forward(self, x):
+          layer_outputs = [x]
+          for i in range(self.num_layers):
+               z = np.dot(x, self.weights[i]) + self.biases[i]
+               x = self.activation(z)
+               layer_outputs.append(x)
+        
+          output = softmax(np.dot(x, self.weights[-1]) + self.biases[-1])
+          layer_outputs.append(output)
+          return layer_outputs
