@@ -2,7 +2,7 @@ import numpy as np
 from activation import activation_functions, softmax
 
 class Feedforward:
-     def __init__(self, input_size, num_layers, hidden_size, output_size, activation = "sigmoid", weight_init = "random"):
+     def __init__(self, input_size, output_size, num_layers = 1, hidden_size = 4, activation = "sigmoid", weight_init = "random"):
           self.num_layers = num_layers
           self.hidden_size = hidden_size
           self.output_size = output_size
