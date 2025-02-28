@@ -34,8 +34,7 @@ class Feedforward:
      def forward(self, x):
           layer_outputs = [x]
           for i in range(self.num_layers):
-               z = np.dot(x, self.weights[i]) + self.biases[i]
-               x = self.activation(z)
+               x = self.activation(np.dot(x, self.weights[i]) + self.biases[i])
                layer_outputs.append(x)
         
           output = softmax(np.dot(x, self.weights[-1]) + self.biases[-1])
