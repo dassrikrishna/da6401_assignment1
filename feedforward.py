@@ -43,24 +43,24 @@ class Feedforward:
      
      #define forward pass
      def forward(self, x):
-          h = [x]
-          a = []
+          z = []
+          a = [x]
           for i in range(self.num_layers):
-               ai = np.dot(h[i], self.weights[i]) + self.biases[i]
+               zi = np.dot(a[i], self.weights[i]) + self.biases[i]
+               z.append(zi)
+               ai = self.activation(zi)
                a.append(ai)
-               hi = self.activation(ai)
-               h.append(hi)
           
-          a_final = np.dot(h[-1], self.weights[-1]) + self.biases[-1]
-          a.append(a_final)
-          y_cap = softmax(a_final)
-          h.append(y_cap)
-          return a, h
+          z_final = np.dot(a[-1], self.weights[-1]) + self.biases[-1]
+          z.append(z_final)
+          y_cap = softmax(z_final)
+          a.append(y_cap)
+          return z, a
      
      #predict final output y^
      def predict(self, x):
-         h = self.forward(x)[1]
-         return h[-1]
+         a = self.forward(x)[1]
+         return a[-1]
      
 sample_input = x_train[0]
 sample_ffnn = Feedforward(input_size = 784, output_size = 10)
