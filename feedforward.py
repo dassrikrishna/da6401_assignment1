@@ -1,24 +1,14 @@
 import numpy as np
 from activation import activation_functions, softmax
 
-from keras.datasets import fashion_mnist
-(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
-
-#normalize pixel values to [0,1] range
-x_train = x_train / 255.0
-x_test = x_test / 255.0
-
-#reshape the data
-x_train = x_train.reshape(-1, 784)
-x_test = x_test.reshape(-1, 784)
-
 class Feedforward:
      def __init__(self, input_size, output_size, num_layers = 1, hidden_size = 4, activation = "sigmoid", weight_init = "random"):
           self.num_layers = num_layers
           self.hidden_size = hidden_size
           self.output_size = output_size
-          #choose activation function 
+          #choose activation function & derivative
           self.activation = activation_functions[activation][0]
+          self.activation_derivative = activation_functions[activation][1]
           #intialize weights and biases
           self.weights, self.biases = self.initialize_weights(input_size, hidden_size, output_size, num_layers, weight_init)
      
@@ -62,7 +52,7 @@ class Feedforward:
          a = self.forward(x)[1]
          return a[-1]
      
-sample_input = x_train[0]
+"""sample_input = x_train[0]
 sample_ffnn = Feedforward(input_size = 784, output_size = 10)
 predictions = sample_ffnn.predict(sample_input)
-print(predictions)
+print(predictions)"""
