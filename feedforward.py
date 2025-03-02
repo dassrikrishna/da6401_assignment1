@@ -59,7 +59,7 @@ class Feedforward:
      
      #predict final output y^
      def predict(self, x):
-         h = self.forward(x)[0]
+         h = self.forward(x)[1]
          return h[-1]
      
 sample_input = x_train[0]
