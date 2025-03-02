@@ -43,21 +43,26 @@ class Feedforward:
      
      #define forward pass
      def forward(self, x):
-          layer_outputs = [x]
+          h = [x]
+          a = []
           for i in range(self.num_layers):
-               x = self.activation(np.dot(x, self.weights[i]) + self.biases[i])
-               layer_outputs.append(x)
-        
-          output = softmax(np.dot(x, self.weights[-1]) + self.biases[-1])
-          layer_outputs.append(output)
-          return layer_outputs
+               ai = np.dot(h[i], self.weights[i]) + self.biases[i]
+               a.append(ai)
+               hi = self.activation(ai)
+               h.append(hi)
+          
+          a_final = np.dot(h[-1], self.weights[-1]) + self.biases[-1]
+          a.append(a_final)
+          y_cap = softmax(a_final)
+          h.append(y_cap)
+          return a, h
      
      #predict final output y^
      def predict(self, x):
-         layer_output = self.forward(x)
-         return layer_output[-1]
+         h = self.forward(x)[0]
+         return h[-1]
      
 sample_input = x_train[0]
-sample_ffnn = Feedforward(input_size=784, output_size=10)
+sample_ffnn = Feedforward(input_size = 784, output_size = 10)
 predictions = sample_ffnn.predict(sample_input)
 print(predictions)
