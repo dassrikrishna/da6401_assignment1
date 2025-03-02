@@ -51,8 +51,3 @@ class Feedforward:
      def predict(self, x):
          a = self.forward(x)[1]
          return a[-1]
-     
-"""sample_input = x_train[0]
-sample_ffnn = Feedforward(input_size = 784, output_size = 10)
-predictions = sample_ffnn.predict(sample_input)
-print(predictions)"""
