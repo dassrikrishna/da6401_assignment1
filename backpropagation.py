@@ -12,6 +12,6 @@ def compute_grads(model, x, y):
         grads_b.insert(0, delta)
         
         if k > 0:
-            error = np.dot(model.weights[k].T, delta)      # del(L)/del(a)
+            error = np.dot(delta, model.weights[k].T)      # del(L)/del(a)
     
     return grads_W, grads_b
