@@ -1,3 +1,5 @@
+# Question 1:
+
 import matplotlib.pyplot as plt
 import numpy as np
 from keras.datasets import fashion_mnist
