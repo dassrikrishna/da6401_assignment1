@@ -21,17 +21,30 @@ def compute_grads(x, y, num_layers, weights, biases, activation):
 
   return grads_W, grads_b
 
-# define stochastic gradient descent
-def sgd(X, Y, weights, biases, num_layers, learning_rate, epochs, activation):
-  for _ in range(epochs):
-    dw = [np.zeros_like(w) for w in weights]
-    db = [np.zeros_like(b) for b in biases]
-    for x, y in zip(X, Y):
-      grads_W, grads_b = compute_grads(x, y, num_layers, weights, biases, activation)
-      for i in range(len(weights)):
-          dw[i] += grads_W[i]
-          db[i] += grads_b[i]
+# optimization:
+# minibatch gradient descent
+# stochastic if batch_size = 1
 
-          weights[i] -= learning_rate * dw[i]
-          biases[i] -= learning_rate * db[i]
+def minibatch_gd(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size):
+
+  samples_size = X.shape[0]
+  for _ in range(epochs):
+
+    for i in range(0, samples_size, batch_size):
+        X_batch = X[i:i + batch_size]
+        Y_batch = Y[i:i + batch_size]
+
+        dw = [np.zeros_like(w) for w in weights]
+        db = [np.zeros_like(b) for b in biases]
+        
+        for x, y in zip(X_batch, Y_batch):
+          grads_W, grads_b = compute_grads(x, y, num_layers, weights, biases, activation)
+          for j in range(len(weights)):
+            dw[j] += grads_W[j]
+            db[j] += grads_b[j]
+        
+        for j in range(len(weights)):
+            weights[j] -= (learning_rate / len(X_batch)) * dw[j]  
+            biases[j] -= (learning_rate / len(X_batch)) * db[j]    
+
   return weights, biases
