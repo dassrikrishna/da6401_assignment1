@@ -48,3 +48,33 @@ def minibatch_gd(X, Y, weights, biases, num_layers, activation, learning_rate, e
             biases[j] -= (learning_rate / len(X_batch)) * db[j]    
 
   return weights, biases
+
+# momentum based gradient descent
+def minibatch_mgd(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum):
+  samples_size = X.shape[0]
+  prev_uw = [np.zeros_like(w) for w in weights]
+  prev_ub = [np.zeros_like(b) for b in biases]
+
+  for epoch in range(epochs):
+    for i in range(0, samples_size, batch_size):
+        X_batch = X[i:i + batch_size]
+        Y_batch = Y[i:i + batch_size]
+
+        dw = [np.zeros_like(w) for w in weights]
+        db = [np.zeros_like(b) for b in biases]
+        
+        for x, y in zip(X_batch, Y_batch):
+          grads_W, grads_b = compute_grads(x, y, num_layers, weights, biases, activation)
+          for j in range(len(weights)):
+            dw[j] += grads_W[j]
+            db[j] += grads_b[j]
+        
+        for j in range(len(weights)):
+          prev_uw[j] = momentum * prev_uw[j] + (learning_rate / len(X_batch)) * dw[j]
+          prev_ub[j] = momentum * prev_ub[j] + (learning_rate / len(X_batch)) * db[j]
+          weights[j] -= prev_uw[j]
+          biases[j] -= prev_ub[j]
+
+  return weights, biases
+
+# 
