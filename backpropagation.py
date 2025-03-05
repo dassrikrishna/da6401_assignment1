@@ -20,3 +20,18 @@ def compute_grads(x, y, num_layers, weights, biases, activation):
           error = np.dot(delta, weights[k].T)      # del(L)/del(a)
 
   return grads_W, grads_b
+
+# define stochastic gradient descent
+def sgd(X, Y, weights, biases, num_layers, learning_rate, epochs, activation):
+  for _ in range(epochs):
+    dw = [np.zeros_like(w) for w in weights]
+    db = [np.zeros_like(b) for b in biases]
+    for x, y in zip(X, Y):
+      grads_W, grads_b = compute_grads(x, y, num_layers, weights, biases, activation)
+      for i in range(len(weights)):
+          dw[i] += grads_W[i]
+          db[i] += grads_b[i]
+
+          weights[i] -= learning_rate * dw[i]
+          biases[i] -= learning_rate * db[i]
+  return weights, biases
