@@ -4,7 +4,7 @@ from keras.datasets import fashion_mnist
 
 from reshape_data import transform, one_hot
 from feedforward import initialize_weights
-from backpropagation import compute_grads
+from backpropagation import *
 from optimizer import *
 # wandb login
 wandb.login()
