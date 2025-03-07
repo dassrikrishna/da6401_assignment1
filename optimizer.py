@@ -19,7 +19,7 @@ def minibatch_gd(X, Y, weights, biases, num_layers, learning_rate, epochs, batch
     X_val, Y_val = X[:val_size], Y[:val_size]  
     X_train, Y_train = X[val_size:], Y[val_size:]
 
-    losses = []
+    #losses = []
 
     for epoch in range(epochs):
         # shuffle training data
@@ -46,7 +46,7 @@ def minibatch_gd(X, Y, weights, biases, num_layers, learning_rate, epochs, batch
         # training loss & accuracy
         Y_cap = np.array([forward(x, num_layers, weights, biases, activation)[1][-1] for x in X_train]).squeeze()
         epoch_loss = loss_function[loss_fun](Y_train, Y_cap)
-        losses.append(epoch_loss)
+        #losses.append(epoch_loss)
         accuracy = compute_accuracy(Y_train, Y_cap)
 
         # validation loss & accuracy
@@ -65,7 +65,7 @@ def minibatch_gd(X, Y, weights, biases, num_layers, learning_rate, epochs, batch
       
         print("epoch:", epoch + 1, "loss:", epoch_loss," & accuracy:", accuracy)
 
-    return losses
+    #return losses
 
 ##################################
 # minibatch momentum based gradient descent
@@ -83,7 +83,7 @@ def minibatch_mgd(X, Y, weights, biases, num_layers, activation, learning_rate, 
     
     prev_uw = [np.zeros_like(w) for w in weights]
     prev_ub = [np.zeros_like(b) for b in biases]
-    losses = []
+    #losses = []
 
     for epoch in range(epochs):
         # shuffle training data
@@ -112,7 +112,7 @@ def minibatch_mgd(X, Y, weights, biases, num_layers, activation, learning_rate, 
         # training loss & accuracy
         Y_cap = np.array([forward(x, num_layers, weights, biases, activation)[1][-1] for x in X_train]).squeeze()
         epoch_loss = loss_function[loss_fun](Y_train, Y_cap)
-        losses.append(epoch_loss)
+        #losses.append(epoch_loss)
         accuracy = compute_accuracy(Y_train, Y_cap)
 
         # validation loss & accuracy
@@ -130,7 +130,7 @@ def minibatch_mgd(X, Y, weights, biases, num_layers, activation, learning_rate, 
         })
       
         print("epoch:", epoch + 1, "loss:", epoch_loss," & accuracy:", accuracy)
-    return losses
+    #return losses
 
 #####################################
 # minibatch nesterov accelerated gradient descent
@@ -148,7 +148,7 @@ def minibatch_nag(X, Y, weights, biases, num_layers, activation, learning_rate, 
 
     prev_vw = [np.zeros_like(w) for w in weights]
     prev_vb = [np.zeros_like(b) for b in biases]
-    losses = []
+    #losses = []
 
     for epoch in range(epochs):
         # shuffle training data
@@ -183,7 +183,7 @@ def minibatch_nag(X, Y, weights, biases, num_layers, activation, learning_rate, 
         # training loss & accuracy
         Y_cap = np.array([forward(x, num_layers, weights, biases, activation)[1][-1] for x in X_train]).squeeze()
         epoch_loss = loss_function[loss_fun](Y_train, Y_cap)
-        losses.append(epoch_loss)
+        #losses.append(epoch_loss)
         accuracy = compute_accuracy(Y_train, Y_cap)
 
         # validation loss & Accuracy
@@ -202,7 +202,7 @@ def minibatch_nag(X, Y, weights, biases, num_layers, activation, learning_rate, 
       
         print("epoch:", epoch + 1, "loss:", epoch_loss," & accuracy:", accuracy)
 
-    return losses
+    #return losses
 
 ##########################################################
 def minibatch_rmsprop(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta, epsilon, loss_fun = "cross_entropy"):
@@ -219,7 +219,7 @@ def minibatch_rmsprop(X, Y, weights, biases, num_layers, activation, learning_ra
 
     v_w = [np.zeros_like(w) for w in weights]
     v_b = [np.zeros_like(b) for b in biases]
-    losses = []
+    #losses = []
 
     for epoch in range(epochs):
         indices = np.random.permutation(X_train.shape[0])
@@ -248,7 +248,7 @@ def minibatch_rmsprop(X, Y, weights, biases, num_layers, activation, learning_ra
         # training loss & accuracy
         Y_cap = np.array([forward(x, num_layers, weights, biases, activation)[1][-1] for x in X_train]).squeeze()
         epoch_loss = loss_function[loss_fun](Y_train, Y_cap)
-        losses.append(epoch_loss)
+        #losses.append(epoch_loss)
         accuracy = compute_accuracy(Y_train, Y_cap)
 
         # validation loss & accuracy
@@ -267,7 +267,7 @@ def minibatch_rmsprop(X, Y, weights, biases, num_layers, activation, learning_ra
       
         print("epoch:", epoch + 1, "loss:", epoch_loss," & accuracy:", accuracy)
 
-    return losses
+    #return losses
 
 ####################
 # minibatch adam gradient decent
@@ -287,7 +287,7 @@ def minibatch_adam(X, Y, weights, biases, num_layers, activation, learning_rate,
     v_w = [np.zeros_like(w) for w in weights]
     m_b = [np.zeros_like(b) for b in biases]
     v_b = [np.zeros_like(b) for b in biases]
-    losses = []
+    #losses = []
 
     for epoch in range(epochs):
         indices = np.random.permutation(X_train.shape[0])
@@ -323,7 +323,7 @@ def minibatch_adam(X, Y, weights, biases, num_layers, activation, learning_rate,
         # training loss & accuracy
         Y_cap = np.array([forward(x, num_layers, weights, biases, activation)[1][-1] for x in X_train]).squeeze()
         epoch_loss = loss_function[loss_fun](Y_train, Y_cap)
-        losses.append(epoch_loss)
+        #losses.append(epoch_loss)
         accuracy = compute_accuracy(Y_train, Y_cap)
 
         # validation loss & accuracy
@@ -342,7 +342,7 @@ def minibatch_adam(X, Y, weights, biases, num_layers, activation, learning_rate,
 
         print("epoch:", epoch + 1, "loss:", epoch_loss," & accuracy:", accuracy)
 
-    return losses
+    #return losses
 
 ################################
 # minibatch nadam  gradient decent
@@ -365,7 +365,7 @@ def minibatch_nadam(X, Y, weights, biases, num_layers, activation, learning_rate
     v_w = [np.zeros_like(w) for w in weights]
     m_b = [np.zeros_like(b) for b in biases]
     v_b = [np.zeros_like(b) for b in biases]
-    losses = []
+    #losses = []
 
     for epoch in range(epochs):
         indices = np.random.permutation(X_train.shape[0])
@@ -405,7 +405,7 @@ def minibatch_nadam(X, Y, weights, biases, num_layers, activation, learning_rate
         # training loss & accuracy
         Y_cap = np.array([forward(x, num_layers, weights, biases, activation)[1][-1] for x in X_train]).squeeze()
         epoch_loss = loss_function[loss_fun](Y_train, Y_cap)
-        losses.append(epoch_loss)
+        #losses.append(epoch_loss)
         accuracy = compute_accuracy(Y_train, Y_cap)
 
         # validation loss & accuracy
@@ -424,4 +424,4 @@ def minibatch_nadam(X, Y, weights, biases, num_layers, activation, learning_rate
 
         print("epoch:", epoch + 1, "loss:", epoch_loss," & accuracy:", accuracy)
 
-    return losses
+    #return losses
