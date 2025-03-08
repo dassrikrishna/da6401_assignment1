@@ -346,9 +346,6 @@ def minibatch_adam(X, Y, weights, biases, num_layers, activation, learning_rate,
 
 ################################
 # minibatch nadam  gradient decent
-import wandb
-import numpy as np
-
 def minibatch_nadam(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun = "cross_entropy"):
     samples_size = X.shape[0]
 
