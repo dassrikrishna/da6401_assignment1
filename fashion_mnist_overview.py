@@ -6,7 +6,7 @@ from keras.datasets import fashion_mnist
 
 # wandb login
 wandb.login()
-wandb.init(project = "MA24M025_DA6401-Assignment-1", mode = "online")
+wandb.init(project = "MA24M025_DA6401_Project-1", mode = "online")
 
 (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
 
