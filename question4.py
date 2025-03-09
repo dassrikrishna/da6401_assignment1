@@ -74,4 +74,4 @@ sweep_config = {
 if __name__ == "__main__":
     wandb.login()
     sweep_id = wandb.sweep(sweep_config, project = "MA24M025_DA6401_Project-1")
-    wandb.agent(sweep_id, function = train, count = 23)  # runs 23 experiments
+    wandb.agent(sweep_id, function = train, count = 50)  # runs 50 experiments
