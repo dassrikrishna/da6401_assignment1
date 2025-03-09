@@ -3,6 +3,11 @@ import numpy as np
 from backpropagation import *
 from feedforward import forward
 from loss_fun import *
+######---------------
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+##############------------
 
 # optimizer:
 ###################################################
@@ -64,7 +69,21 @@ def minibatch_gd(X, Y, weights, biases, num_layers, learning_rate, epochs, batch
         })
       
         print("epoch:", epoch + 1, "loss:", epoch_loss," & accuracy:", accuracy)
+#########---------
+    # compute confusion matrix
+    Y_pred_labels = np.argmax(Y_val_cap, axis = 1)
+    Y_true_labels = np.argmax(Y_val, axis = 1)
+    conf_matrix = confusion_matrix(Y_true_labels, Y_pred_labels)
 
+    # plot confusion matrix
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(conf_matrix, annot = True, fmt = "d", cmap = "Blues")
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.title("Confusion Matrix")
+
+    #  log confusion matrix to wandb
+    wandb.log({"confusion_matrix": wandb.Image(plt)})
     #return losses
 
 ##################################
@@ -130,6 +149,22 @@ def minibatch_mgd(X, Y, weights, biases, num_layers, activation, learning_rate, 
         })
       
         print("epoch:", epoch + 1, "loss:", epoch_loss," & accuracy:", accuracy)
+#########---------
+    # compute confusion matrix
+    Y_pred_labels = np.argmax(Y_val_cap, axis = 1)
+    Y_true_labels = np.argmax(Y_val, axis = 1)
+    conf_matrix = confusion_matrix(Y_true_labels, Y_pred_labels)
+
+    # plot confusion matrix
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(conf_matrix, annot = True, fmt = "d", cmap = "Blues")
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.title("Confusion Matrix")
+
+    #  log confusion matrix to wandb
+    wandb.log({"confusion_matrix": wandb.Image(plt)})
+
     #return losses
 
 #####################################
@@ -201,7 +236,22 @@ def minibatch_nag(X, Y, weights, biases, num_layers, activation, learning_rate, 
         })
       
         print("epoch:", epoch + 1, "loss:", epoch_loss," & accuracy:", accuracy)
+#########---------
+    # compute confusion matrix
+    Y_pred_labels = np.argmax(Y_val_cap, axis = 1)
+    Y_true_labels = np.argmax(Y_val, axis = 1)
+    conf_matrix = confusion_matrix(Y_true_labels, Y_pred_labels)
 
+    # plot confusion matrix
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(conf_matrix, annot = True, fmt = "d", cmap = "Blues")
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.title("Confusion Matrix")
+
+    #  log confusion matrix to wandb
+    wandb.log({"confusion_matrix": wandb.Image(plt)})
+##############------
     #return losses
 
 ##########################################################
@@ -266,7 +316,22 @@ def minibatch_rmsprop(X, Y, weights, biases, num_layers, activation, learning_ra
         })
       
         print("epoch:", epoch + 1, "loss:", epoch_loss," & accuracy:", accuracy)
+#########---------
+    # compute confusion matrix
+    Y_pred_labels = np.argmax(Y_val_cap, axis = 1)
+    Y_true_labels = np.argmax(Y_val, axis = 1)
+    conf_matrix = confusion_matrix(Y_true_labels, Y_pred_labels)
 
+    # plot confusion matrix
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(conf_matrix, annot = True, fmt = "d", cmap = "Blues")
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.title("Confusion Matrix")
+
+    #  log confusion matrix to wandb
+    wandb.log({"confusion_matrix": wandb.Image(plt)})
+######-------------------
     #return losses
 
 ####################
@@ -341,7 +406,22 @@ def minibatch_adam(X, Y, weights, biases, num_layers, activation, learning_rate,
         })
 
         print("epoch:", epoch + 1, "loss:", epoch_loss," & accuracy:", accuracy)
+#########---------
+    # compute confusion matrix
+    Y_pred_labels = np.argmax(Y_val_cap, axis = 1)
+    Y_true_labels = np.argmax(Y_val, axis = 1)
+    conf_matrix = confusion_matrix(Y_true_labels, Y_pred_labels)
 
+    # plot confusion matrix
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(conf_matrix, annot = True, fmt = "d", cmap = "Blues")
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.title("Confusion Matrix")
+
+    #  log confusion matrix to wandb
+    wandb.log({"confusion_matrix": wandb.Image(plt)})
+######-------------------
     #return losses
 
 ################################
@@ -420,5 +500,20 @@ def minibatch_nadam(X, Y, weights, biases, num_layers, activation, learning_rate
         })
 
         print("epoch:", epoch + 1, "loss:", epoch_loss," & accuracy:", accuracy)
+#########---------
+    # compute confusion matrix
+    Y_pred_labels = np.argmax(Y_val_cap, axis = 1)
+    Y_true_labels = np.argmax(Y_val, axis = 1)
+    conf_matrix = confusion_matrix(Y_true_labels, Y_pred_labels)
 
+    # plot confusion matrix
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(conf_matrix, annot = True, fmt = "d", cmap = "Blues")
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.title("Confusion Matrix")
+
+    #  log confusion matrix to wandb
+    wandb.log({"confusion_matrix": wandb.Image(plt)})
+######-------------------
     #return losses
