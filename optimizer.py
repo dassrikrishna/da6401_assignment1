@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 # optimizer:
 ###################################################
 # minibatch gradient descent
-def minibatch_gd(X, Y, weights, biases, num_layers, learning_rate, epochs, batch_size, activation, loss_fun = "cross_entropy"):
+def minibatch_gd(X, Y, weights, biases, num_layers, learning_rate, epochs, batch_size, activation, loss_fun):
     samples_size = X.shape[0]
     
     # shuffle the dataset before splitting
@@ -88,7 +88,7 @@ def minibatch_gd(X, Y, weights, biases, num_layers, learning_rate, epochs, batch
 
 ##################################
 # minibatch momentum based gradient descent
-def minibatch_mgd(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum, loss_fun = "cross_entropy"):
+def minibatch_mgd(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum, loss_fun):
     samples_size = X.shape[0]
     
     # suffle the dataset before splitting
@@ -169,7 +169,7 @@ def minibatch_mgd(X, Y, weights, biases, num_layers, activation, learning_rate, 
 
 #####################################
 # minibatch nesterov accelerated gradient descent
-def minibatch_nag(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum, loss_fun = "cross_entropy"):
+def minibatch_nag(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum, loss_fun):
     samples_size = X.shape[0]
 
     # shuffle dataset before splitting
@@ -255,7 +255,7 @@ def minibatch_nag(X, Y, weights, biases, num_layers, activation, learning_rate, 
     #return losses
 
 ##########################################################
-def minibatch_rmsprop(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta, epsilon, loss_fun = "cross_entropy"):
+def minibatch_rmsprop(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta, epsilon, loss_fun):
     samples_size = X.shape[0]
 
     # shuffle dataset before splitting
@@ -336,7 +336,7 @@ def minibatch_rmsprop(X, Y, weights, biases, num_layers, activation, learning_ra
 
 ####################
 # minibatch adam gradient decent
-def minibatch_adam(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun = "cross_entropy"):
+def minibatch_adam(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun):
     samples_size = X.shape[0]
 
     # shuffle dataset before splitting
@@ -426,7 +426,7 @@ def minibatch_adam(X, Y, weights, biases, num_layers, activation, learning_rate,
 
 ################################
 # minibatch nadam  gradient decent
-def minibatch_nadam(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun = "cross_entropy"):
+def minibatch_nadam(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun):
     samples_size = X.shape[0]
 
     # shuffle dataset before splitting
