@@ -31,23 +31,25 @@ def train():
     epsilon = 1e-8
     beta1 = 0.5
     beta2 = 0.5
+    #loss_fun = "cross_entropy"
+    loss_fun = "mean_squared_error"
 
     # initialize weights
     weights, biases = initialize_weights(input_size, hidden_size, output_size, num_layers, weight_init)
 
     # Choose optimizer
     if optimizer == "sgd":
-        minibatch_gd(x_train, y_train, weights, biases, num_layers, learning_rate, epochs, batch_size, activation)
+        minibatch_gd(x_train, y_train, weights, biases, num_layers, learning_rate, epochs, batch_size, activation, loss_fun)
     elif optimizer == "momentum":
-        minibatch_mgd(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum)
+        minibatch_mgd(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum, loss_fun)
     elif optimizer == "nesterov":
-        minibatch_nag(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum)
+        minibatch_nag(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum, loss_fun)
     elif optimizer == "rmsprop":
-        minibatch_rmsprop(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta, epsilon)
+        minibatch_rmsprop(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta, epsilon, loss_fun)
     elif optimizer == "adam":
-        minibatch_adam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon)
+        minibatch_adam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun)
     elif optimizer == "nadam":
-        minibatch_nadam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon)
+        minibatch_nadam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun)
     
     wandb.finish()
 
@@ -73,5 +75,5 @@ sweep_config = {
 # Initialize sweep and run directly
 if __name__ == "__main__":
     wandb.login()
-    sweep_id = wandb.sweep(sweep_config, project = "MA24M025_DA6401_Project-1")
-    wandb.agent(sweep_id, function = train, count = 50)  # runs 50 experiments
+    sweep_id = wandb.sweep(sweep_config, project = "MA24M025_DA6401_Project-2")
+    wandb.agent(sweep_id, function = train, count = 3)  # runs 50 experiments
