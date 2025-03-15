@@ -28,23 +28,24 @@ beta1 = 0.5
 beta2 = 0.5
 epsilon = 1e-8
 loss_fun = "cross_entropy"
+weight_decay = 0.001
 
 """weights, biases = initialize_weights(input_size, hidden_size, output_size, num_layers, weight_init)
-minibatch_gd(x_train, y_train, weights, biases, num_layers, learning_rate, epochs, batch_size, activation)"""
+minibatch_gd(x_train, y_train, weights, biases, num_layers, learning_rate, epochs, batch_size, activation, loss_fun, weight_decay)"""
 
 """weights, biases = initialize_weights(input_size, hidden_size, output_size, num_layers, weight_init)
-minibatch_mgd(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum)"""
+minibatch_mgd(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum, loss_fun, weight_decay)"""
 
 """weights, biases = initialize_weights(input_size, hidden_size, output_size, num_layers, weight_init)
-minibatch_nag(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum)"""
+minibatch_nag(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum, loss_fun, weight_decay)"""
 
 """weights, biases = initialize_weights(input_size, hidden_size, output_size, num_layers, weight_init)
-minibatch_rmsprop(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta, epsilon)"""
+minibatch_rmsprop(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta, epsilon, loss_fun, weight_decay)"""
 
 """weights, biases = initialize_weights(input_size, hidden_size, output_size, num_layers, weight_init)
-minibatch_adam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon)"""
+minibatch_adam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun, weight_decay)"""
 
 weights, biases = initialize_weights(input_size, hidden_size, output_size, num_layers, weight_init)
-minibatch_nadam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun)
+minibatch_nadam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun, weight_decay)
 
 wandb.finish()
