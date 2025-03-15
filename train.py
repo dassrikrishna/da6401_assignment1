@@ -25,6 +25,7 @@ def parse_args():
     parser.add_argument('-nhl', '--num_layers', type = int, default = 1, help = 'Number of hidden layers')
     parser.add_argument('-sz', '--hidden_size', type = int, default = 4, help = 'Hidden layer size')
     parser.add_argument('-a', '--activation', choices = ['identity', 'sigmoid', 'tanh', 'ReLU'], default = 'sigmoid', help = 'Activation function')
+    parser.add_argument('-w_d', '--weight_decay',type = float, default = 0.0, help = "weight decay for L2 regurlarization")
     return parser.parse_args()
 
 
@@ -45,17 +46,17 @@ def train():
     weights, biases = initialize_weights(input_size, config.hidden_size, output_size, config.num_layers, config.weight_init)
 
     if config.optimizer == "sgd":
-        minibatch_gd(x_train, y_train, weights, biases, config.num_layers, config.learning_rate, config.epochs, config.batch_size, config.activation, config.loss_fun)
+        minibatch_gd(x_train, y_train, weights, biases, config.num_layers, config.learning_rate, config.epochs, config.batch_size, config.activation, config.loss_fun, config.weight_decay)
     elif config.optimizer == "momentum":
-        minibatch_mgd(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.momentum, config.loss_fun)
+        minibatch_mgd(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.momentum, config.loss_fun, config.weight_decay)
     elif config.optimizer == "nesterov":
-        minibatch_nag(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.momentum, config.loss_fun)
+        minibatch_nag(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.momentum, config.loss_fun, config.weight_decay)
     elif config.optimizer == "rmsprop":
-        minibatch_rmsprop(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.beta, config.epsilon, config.loss_fun)
+        minibatch_rmsprop(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.beta, config.epsilon, config.loss_fun, config.weight_decay)
     elif config.optimizer == "adam":
-        minibatch_adam(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.beta1, config.beta2, config.epsilon, config.loss_fun)
+        minibatch_adam(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.beta1, config.beta2, config.epsilon, config.loss_fun, config.weight_decay)
     elif config.optimizer == "nadam":
-        minibatch_nadam(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.beta1, config.beta2, config.epsilon, config.loss_fun)
+        minibatch_nadam(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.beta1, config.beta2, config.epsilon, config.loss_fun, config.weight_decay)
 
     wandb.finish()
 
