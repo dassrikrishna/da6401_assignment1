@@ -25,6 +25,7 @@ def train():
     epochs = config.epochs
     batch_size = config.batch_size
     optimizer = config.optimizer
+    weight_decay = config.weight_decay
 
     momentum = 0.5
     beta = 0.5
@@ -34,22 +35,23 @@ def train():
     #loss_fun = "cross_entropy"
     loss_fun = "mean_squared_error"
 
+
     # initialize weights
     weights, biases = initialize_weights(input_size, hidden_size, output_size, num_layers, weight_init)
 
     # Choose optimizer
     if optimizer == "sgd":
-        minibatch_gd(x_train, y_train, weights, biases, num_layers, learning_rate, epochs, batch_size, activation, loss_fun)
+        minibatch_gd(x_train, y_train, weights, biases, num_layers, learning_rate, epochs, batch_size, activation,  loss_fun, weight_decay)
     elif optimizer == "momentum":
-        minibatch_mgd(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum, loss_fun)
+        minibatch_mgd(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum,  loss_fun, weight_decay)
     elif optimizer == "nesterov":
-        minibatch_nag(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum, loss_fun)
+        minibatch_nag(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum,  loss_fun, weight_decay)
     elif optimizer == "rmsprop":
-        minibatch_rmsprop(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta, epsilon, loss_fun)
+        minibatch_rmsprop(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta, epsilon,  loss_fun, weight_decay)
     elif optimizer == "adam":
-        minibatch_adam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun)
+        minibatch_adam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon,  loss_fun, weight_decay)
     elif optimizer == "nadam":
-        minibatch_nadam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun)
+        minibatch_nadam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon,  loss_fun, weight_decay)
     
     wandb.finish()
 
@@ -62,7 +64,7 @@ sweep_config = {
         "epochs": {"values": [5, 10]},
         "num_layers": {"values": [3, 4, 5]},
         "hidden_size": {"values": [32, 64, 128]},
-        #"weight_decay": {"values": [0, 0.0005, 0.5]},
+        "weight_decay": {"values": [0, 0.0005, 0.5]},
         "learning_rate": {"values": [0.001, 0.0001]},
         "optimizer": {"values": ["sgd", "momentum", "nesterov", "rmsprop", "adam", "nadam"]},
         "batch_size": {"values": [16, 32, 64]},
@@ -76,4 +78,4 @@ sweep_config = {
 if __name__ == "__main__":
     wandb.login()
     sweep_id = wandb.sweep(sweep_config, project = "MA24M025_DA6401_Project-2")
-    wandb.agent(sweep_id, function = train, count = 3)  # runs 50 experiments
+    wandb.agent(sweep_id, function = train, count = 1)  # runs 50 experiments
