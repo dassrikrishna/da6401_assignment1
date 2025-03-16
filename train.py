@@ -14,7 +14,7 @@ def parse_args():
     parser.add_argument('-e', '--epochs', type = int, default = 5, help = 'Number of epochs')
     parser.add_argument('-b', '--batch_size', type = int, default = 4, help = 'Batch size')
     parser.add_argument('-l', '--loss_fun', choices = ['mean_squared_error', 'cross_entropy'], default = 'cross_entropy', help = 'Loss function')
-    parser.add_argument('-o', '--optimizer', choices = ['sgd', 'momentum', 'nesterov', 'rmsprop', 'adam', 'nadam'], default = 'sgd', help = 'Optimizer')
+    parser.add_argument('-o', '--optimizer', choices = ['sgd', 'momentum', 'nesterov', 'rmsprop', 'adam', 'nadam'], default = 'adam', help = 'Optimizer')
     parser.add_argument('-lr', '--learning_rate', type = float, default = 0.1, help = 'Learning rate')
     parser.add_argument('-m', '--momentum', type = float, default = 0.5, help = 'Momentum for momentum and nesterov optimizers')
     parser.add_argument('-beta', '--beta', type = float, default = 0.5, help = 'Beta for rmsprop')
