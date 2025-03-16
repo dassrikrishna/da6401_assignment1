@@ -6,10 +6,7 @@ from feedforward import forward
 def compute_grads(x, y, num_layers, weights, biases, activation, weight_decay):
   z, a = forward(x, num_layers, weights, biases, activation) # z---preactivation, a----activation
   y_cap = a[-1]
-
-  # 1. cross entropy loss + softmax in last layer
-  # 2. squre loss(/2) + liner in last layer
-  delta = y_cap - y        # del(L)/del(z) 
+  delta = y_cap - y   #for cross entropy  # del(L)/del(z) 
 
   grads_W, grads_b = [], []
 
@@ -18,8 +15,9 @@ def compute_grads(x, y, num_layers, weights, biases, activation, weight_decay):
   for k in reversed(range(len(weights))):  
     # compute gradients with L2 regularization
     grad_W = np.outer(a[k], delta) + weight_decay * weights[k]
+    grad_b = delta + weight_decay * biases[k]
     grads_W.insert(0, grad_W)
-    grads_b.insert(0, delta)
+    grads_b.insert(0, grad_b)
 
     error = np.dot(delta, weights[k].T) # del(L)/del(a)
     if k > 0:
