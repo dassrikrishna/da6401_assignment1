@@ -5,6 +5,7 @@ from keras.datasets import fashion_mnist
 from reshape_data import transform, one_hot
 from feedforward import initialize_weights
 from optimizer import *
+from taccuracy_confusion import *
 
 x_train, y_train = transform(x_train), one_hot(y_train)
 x_test, y_test = transform(x_test), one_hot(y_test)
@@ -12,7 +13,7 @@ x_test, y_test = transform(x_test), one_hot(y_test)
 def train():
     wandb.init()
     config = wandb.config
-    
+
     # tuning hyperparameter
     input_size = 784
     output_size = 10
@@ -32,27 +33,35 @@ def train():
     epsilon = 1e-8
     beta1 = 0.5
     beta2 = 0.5
-    #loss_fun = "cross_entropy"
-    loss_fun = "mean_squared_error"
+    loss_fun = "cross_entropy"
+    #loss_fun = "mean_squared_error"
 
+    # run name
+    run_name = f"ep-{epochs}_hl-{num_layers}_hs-{hidden_size}_wi-{weight_init}_bs-{batch_size}_lr{learning_rate}_ac-{activation}_op-{optimizer}_wd-{weight_decay}"
+    wandb.run.name = run_name
 
     # initialize weights
     weights, biases = initialize_weights(input_size, hidden_size, output_size, num_layers, weight_init)
 
     # Choose optimizer
     if optimizer == "sgd":
-        minibatch_gd(x_train, y_train, weights, biases, num_layers, learning_rate, epochs, batch_size, activation,  loss_fun, weight_decay)
+        weights, biases = minibatch_gd(x_train, y_train, weights, biases, num_layers, learning_rate, epochs, batch_size, activation,  loss_fun, weight_decay)
+        cal_taccu_confu_mat(x_test, y_test, num_layers, weights, biases, activation)
     elif optimizer == "momentum":
-        minibatch_mgd(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum,  loss_fun, weight_decay)
+        weights, biases = minibatch_mgd(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum,  loss_fun, weight_decay)
+        cal_taccu_confu_mat(x_test, y_test, num_layers, weights, biases, activation)
     elif optimizer == "nesterov":
-        minibatch_nag(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum,  loss_fun, weight_decay)
+        weights, biases = minibatch_nag(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum,  loss_fun, weight_decay)
+        cal_taccu_confu_mat(x_test, y_test, num_layers, weights, biases, activation)
     elif optimizer == "rmsprop":
-        minibatch_rmsprop(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta, epsilon,  loss_fun, weight_decay)
+        weights, biases = minibatch_rmsprop(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta, epsilon,  loss_fun, weight_decay)
+        cal_taccu_confu_mat(x_test, y_test, num_layers, weights, biases, activation)
     elif optimizer == "adam":
-        minibatch_adam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon,  loss_fun, weight_decay)
+        weights, biases = minibatch_adam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon,  loss_fun, weight_decay)
+        cal_taccu_confu_mat(x_test, y_test, num_layers, weights, biases, activation)
     elif optimizer == "nadam":
-        minibatch_nadam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon,  loss_fun, weight_decay)
-    
+        weights, biases = minibatch_nadam(x_train, y_train, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon,  loss_fun, weight_decay)
+        cal_taccu_confu_mat(x_test, y_test, num_layers, weights, biases, activation)
     wandb.finish()
 
 # load sweep_config 
@@ -77,5 +86,5 @@ sweep_config = {
 # Initialize sweep and run directly
 if __name__ == "__main__":
     wandb.login()
-    sweep_id = wandb.sweep(sweep_config, project = "MA24M025_DA6401_Project-2")
-    wandb.agent(sweep_id, function = train, count = 1)  # runs 50 experiments
+    sweep_id = wandb.sweep(sweep_config, project = "CrossEntropy67")
+    wandb.agent(sweep_id, function = train, count = 67)  # runs 67 experiments
