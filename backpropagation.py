@@ -26,8 +26,3 @@ def compute_grads(x, y, num_layers, weights, biases, activation, weight_decay):
       delta = activation_derivative(z[k-1]) * error   # del(L)/del(z)
 
   return grads_W, grads_b
-
-def compute_accuracy(Y_true, Y_pred):
-  true_values = np.argmax(Y_true, axis=1)
-  pred_values = np.argmax(Y_pred, axis=1)  
-  return np.mean(true_values == pred_values)
