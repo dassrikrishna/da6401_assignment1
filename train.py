@@ -4,6 +4,7 @@ from keras.datasets import fashion_mnist, mnist
 from reshape_data import transform, one_hot
 from feedforward import initialize_weights
 from optimizer import *
+from taccuracy_confusion import cal_taccu_confu_mat
 
 
 def parse_args():
@@ -45,19 +46,25 @@ def train():
     input_size, output_size = 784, 10
     weights, biases = initialize_weights(input_size, config.hidden_size, output_size, config.num_layers, config.weight_init)
 
-    if config.optimizer == "sgd":
-        minibatch_gd(x_train, y_train, weights, biases, config.num_layers, config.learning_rate, config.epochs, config.batch_size, config.activation, config.loss_fun, config.weight_decay)
+    if config.optimizer == "sgd": 
+        weights, biases = minibatch_gd(x_train, y_train, weights, biases, config.num_layers, config.learning_rate, config.epochs, config.batch_size, config.activation, config.loss_fun, config.weight_decay)
+        
     elif config.optimizer == "momentum":
-        minibatch_mgd(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.momentum, config.loss_fun, config.weight_decay)
+        weights, biases = minibatch_mgd(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.momentum, config.loss_fun, config.weight_decay)
+        
     elif config.optimizer == "nesterov":
-        minibatch_nag(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.momentum, config.loss_fun, config.weight_decay)
+        weights, biases = minibatch_nag(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.momentum, config.loss_fun, config.weight_decay)
+        
     elif config.optimizer == "rmsprop":
-        minibatch_rmsprop(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.beta, config.epsilon, config.loss_fun, config.weight_decay)
+        weights, biases = minibatch_rmsprop(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.beta, config.epsilon, config.loss_fun, config.weight_decay)
+        
     elif config.optimizer == "adam":
-        minibatch_adam(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.beta1, config.beta2, config.epsilon, config.loss_fun, config.weight_decay)
+        weights, biases = minibatch_adam(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.beta1, config.beta2, config.epsilon, config.loss_fun, config.weight_decay)
+        
     elif config.optimizer == "nadam":
-        minibatch_nadam(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.beta1, config.beta2, config.epsilon, config.loss_fun, config.weight_decay)
-
+        weights, biases = minibatch_nadam(x_train, y_train, weights, biases, config.num_layers, config.activation, config.learning_rate, config.epochs, config.batch_size, config.beta1, config.beta2, config.epsilon, config.loss_fun, config.weight_decay)
+    
+    cal_taccu_confu_mat(x_test, y_test, config.num_layers, weights, biases, config.activation)
     wandb.finish()
 
 
