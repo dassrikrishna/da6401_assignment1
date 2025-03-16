@@ -66,7 +66,7 @@ def train():
 
 # load sweep_config 
 sweep_config = {
-    "program": "question4.py",
+    "program": "question4&7.py",
     "method": "bayes",  # bayesian Optimization for efficiency
     "metric": {"name": "val_accuracy", "goal": "maximize"},
     "parameters": {
