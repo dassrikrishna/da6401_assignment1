@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 from keras.datasets import fashion_mnist
 
+(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+
 # wandb login
 wandb.login()
-wandb.init(project = "MA24M025_DA6401_Project-1", mode = "online")
-
-(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+wandb.init(project = "Fashion_MNIST_Image", name = "fashion_mnist_image")
 
 # wandb
 wandb_images = []
@@ -26,8 +26,12 @@ for i in range(10):
     wandb_image = wandb.Image(x_train[index], caption = class_names[i]) # wandb image
     wandb_images.append(wandb_image)
 
-plt.show()
+plt.show(block = False)  # non-blocking display
+plt.pause(3)  # show images for 3 seconds
+plt.close()  # close the window automatically
+
 # log image 
 wandb.log({"Fashion-MNIST Images": wandb_images})
 # finish
-wandb.finish()
+wandb.finish() 
+print("WandB run finished successfully.")
