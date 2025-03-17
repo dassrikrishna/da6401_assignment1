@@ -32,8 +32,8 @@ Your submission should include:
   
    - [Data Processing](#data-processing)
    - [Neural Network Components](#neural-network-components)
-   - [Optimization and Performance Evaluation](optimization-and-performance-evaluation)
-   - [Evaluation and Experimentation](evaluation-and-experimentation)
+   - [Optimization and Performance Evaluation](#optimization-and-performance-evaluation)
+   - [Evaluation and Experimentation](#evaluation-and-experimentation)
      
 - [Training Script (`train.py`)](#training-script-trainpy)
 - [Usage Examples](#usage-examples)
