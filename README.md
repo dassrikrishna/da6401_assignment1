@@ -48,6 +48,22 @@ cd da6401_assignment1
 pip install -r requirements.txt
 ```
 ## **Project Structure**
+```
+|-- train.py                         # Main script to train the neural network
+|-- reshape_data.py                  # Preprocessing: normalize, reshape, and one-hot encode
+|-- activation.py                    # Activation functions and their derivatives
+|-- loss_fun.py                      # Cross-entropy loss and MSE with L2 regularization
+|-- accuracy_confusion.py            # Accuracy computation and confusion matrix
+|-- fashion_mnist_overview.py        # Dataset loading and visualization
+|-- feedforward.py                   # Forward propagation with Xavier & Random Normal init
+|-- question2.py                     # Outputs probability distribution for a sample image
+|-- backpropagation.py               # Computes gradients for weight updates
+|-- optimizer.py                     # Implements multiple optimizers
+|-- question3.py                     # Runs an optimizer and outputs updated weights
+|-- question4n7.py                   # Hyperparameter tuning & test accuracy tracking
+|-- README.md                        # Project documentation
+|-- requirements.txt                 # Dependencies  
+```
 ### **Data Processing**
 - `reshape_data.py`
   - Normalizes images to [0,1] range.
