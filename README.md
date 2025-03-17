@@ -143,4 +143,3 @@ python train.py --wandb_entity ma24m025-indian-institute-of-technology-madras --
 ```bash
 python train.py --wandb_entity ma24m025-indian-institute-of-technology-madras --wandb_project DA6401train-Project --dataset mnist --epochs 10 --batch_size 64 --optimizer nadam --learning_rate 0.001 --num_layers 3 --hidden_size 128 --activation tanh --weight_init Xavier --weight_decay 0.0 --beta1 0.9 --beta2 0.99
 ```
-
