@@ -1,5 +1,5 @@
 # DA6401 Assignment-1
-#### Detailed Weights & Biases Report for My Project: [Click Here](https://wandb.ai/ma24m025-indian-institute-of-technology-madras/MA24M025_DA6401_Project-1/reports/MA24M025_DA6401-Assignment-1-Report--VmlldzoxMTY5MDE0NQ)
+#### Detailed Weights & Biases Report for My Project: [Click Here]([https://wandb.ai/ma24m025-indian-institute-of-technology-madras/MA24M025_DA6401_Project-1/reports/MA24M025_DA6401-Assignment-1-Report--VmlldzoxMTY5MDE0NQ](https://wandb.ai/ma24m025-indian-institute-of-technology-madras/MA24M025_DA6401_Project-1/reports/MA24M025_DA6401-Assignment-1-Report--VmlldzoxMTY5MDE0NQ?accessToken=oz18j1z9a8n9y8mncmvvgudny0jn37z5q4er95buq028awpvlw1chanu06rc5et0))
 #### Github Link: [Click Here](https://github.com/dassrikrishna/da6401_assignment1)
 ## DEEP LEARNING
 #### ```SRIKRISHNA DAS (MA24M025)```
