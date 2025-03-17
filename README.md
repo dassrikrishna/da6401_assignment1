@@ -29,6 +29,15 @@ Your submission should include:
 ## **Table of Contents**
 - [Installation](#installation)
 - [Project Structure](#project-structure)
+  
+   - [Data Processing](#data-processing)
+   - [Neural Network Components](#neural-network-components)
+   - [Optimization and Performance Evaluation](optimization-and-performance-evaluation)
+   - [Evaluation and Experimentation](evaluation-and-experimentation)
+     
+- [Training Script (`train.py`)](#training-script-trainpy)
+- [Usage Examples](#usage-examples)
+- 
 ## **Installation**
 To set up the project, clone the repository and install the required dependencies:
 ```bash
@@ -86,21 +95,52 @@ pip install -r requirements.txt
   - Outputs probability distribution for each class using `feedforward.py`.
 
 - `question3.py`
+  - Data procesing (change shape, one-hot-encoding) using `reshape_data.py`. 
   - Runs an optimizer on a sample input.
+  - Implemented `compute_grads` in `backpropagation.py` to calculate gradients of weights and biases using backpropagation.
+  - Used 1compute_grads` in `optimizer.py` to define various optimizers.
+  - Incorporated the forward pass in each optimizer for weight updates.
   - Outputs `epoch`, `epoch_loss`, `accuracy`, and updated weights & biases.
 
 - `question4n7.py`
   - Performs hyperparameter tuning using Bayesian optimization.
   - Defines `sweep_config` with tunable parameters:
-    - Number of epochs
-    - Number of layers
-    - Hidden layer size
-    - Weight decay (L2 regularization)
-    - Learning rate
-    - Optimizer
-    - Batch size
-    - Weight initialization method
-    - Activation function
+    - Number of epochs: 5, 10
+    - Number of layers: 3, 4, 5
+    - Hidden layer size: 32, 64, 128
+    - Weight decay (L2 regularization): 0, 0.0005, 0.5
+    - Learning rate: 0.001, 0.0001
+    - Optimizer: "sgd", "momentum", "nesterov", "rmsprop", "adam", "nadam"
+    - Batch size: 16, 32, 64
+    - Weight initialization method: "random", "Xavier"
+    - Activation function: "sigmoid", "tanh", "ReLU"
   - Runs sweeps and evaluates test accuracy and confusion matrix for each experiment.
     
+## **Training Script (`train.py`)**  
+- Implements the **main training pipeline** for the feedforward neural network.  
+- Supports **command-line configuration** using `argparse` for flexible training options.  
+- Integrates with **Weights & Biases (`wandb`)** for logging hyperparameters, loss, and accuracy.  
+
+### **Key Features:**  
+- **Command-Line Interface (CLI)**  
+  - Configures hyperparameters dynamically via command-line arguments.  
+  - Supports dataset selection, training settings, network architecture, optimization methods, and regularization parameters.  
+
+- **Training with Optimizers**  
+  - Implements different optimizers from `optimizer.py`:  
+    - **SGD, Momentum, NAG, RMSprop, Adam, Nadam**  
+  - Calls the corresponding optimizer function to perform forward pass, gradient computation (`compute_grads`), and weight updates.  
+
+- **Evaluation & Logging**  
+  - Computes **test accuracy** and generates a **confusion matrix** using `cal_taccu_confu_mat` from `taccuracy_confusion.py`.  
+  - Logs **epoch_loss, train_accuracy, val_loss, val_accuracy** to **Weights & Biases (`wandb`)**.  
+
+## **Usage Examples**  
+```bash
+python train.py --wandb_entity ma24m025-indian-institute-of-technology-madras --wandb_project DA6401train-Project
+```
+
+```bash
+python train.py --wandb_entity ma24m025-indian-institute-of-technology-madras --wandb_project DA6401train-Project --dataset mnist --epochs 10 --batch_size 64 --optimizer nadam --learning_rate 0.001 --num_layers 3 --hidden_size 128 --activation tanh --weight_init Xavier --weight_decay 0.0 --beta1 0.9 --beta2 0.99
+```
 
