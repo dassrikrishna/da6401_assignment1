@@ -35,9 +35,11 @@ Your submission should include:
    - [Optimization and Performance Evaluation](#optimization-and-performance-evaluation)
    - [Evaluation and Experimentation](#evaluation-and-experimentation)
      
-- [Training Script (`train.py`)](#training-script-trainpy)
-- [Usage Examples](#usage-examples)
-- 
+- [Training Script (train.py)](#training-script-trainpy)
+  
+  - [Usage Examples](#usage-examples)
+  - [Arguments to be supported](#arguments-to-be-supported)
+  
 ## **Installation**
 To set up the project, clone the repository and install the required dependencies:
 ```bash
@@ -46,6 +48,22 @@ cd da6401_assignment1
 pip install -r requirements.txt
 ```
 ## **Project Structure**
+```
+|-- train.py                         # Main script to train the neural network
+|-- reshape_data.py                  # Preprocessing: normalize, reshape, and one-hot encode
+|-- activation.py                    # Activation functions and their derivatives
+|-- loss_fun.py                      # Cross-entropy loss and MSE with L2 regularization
+|-- accuracy_confusion.py            # Accuracy computation and confusion matrix
+|-- fashion_mnist_overview.py        # Dataset loading and visualization
+|-- feedforward.py                   # Forward propagation with Xavier & Random Normal init
+|-- question2.py                     # Outputs probability distribution for a sample image
+|-- backpropagation.py               # Computes gradients for weight updates
+|-- optimizer.py                     # Implements multiple optimizers
+|-- question3.py                     # Runs an optimizer and outputs updated weights
+|-- question4n7.py                   # Hyperparameter tuning & test accuracy tracking
+|-- README.md                        # Project documentation
+|-- requirements.txt                 # Dependencies  
+```
 ### **Data Processing**
 - `reshape_data.py`
   - Normalizes images to [0,1] range.
@@ -116,7 +134,7 @@ pip install -r requirements.txt
     - Activation function: "sigmoid", "tanh", "ReLU"
   - Runs sweeps and evaluates test accuracy and confusion matrix for each experiment.
     
-## **Training Script (`train.py`)**  
+## **Training Script (train.py)**  
 - Implements the **main training pipeline** for the feedforward neural network.  
 - Supports **command-line configuration** using `argparse` for flexible training options.  
 - Integrates with **Weights & Biases (`wandb`)** for logging hyperparameters, loss, and accuracy.  
@@ -135,7 +153,7 @@ pip install -r requirements.txt
   - Computes **test accuracy** and generates a **confusion matrix** using `cal_taccu_confu_mat` from `taccuracy_confusion.py`.  
   - Logs **epoch_loss, train_accuracy, val_loss, val_accuracy** to **Weights & Biases (`wandb`)**.  
 
-## **Usage Examples**  
+### **Usage Examples**  
 ```bash
 python train.py --wandb_entity ma24m025-indian-institute-of-technology-madras --wandb_project DA6401train-Project
 ```
@@ -143,3 +161,27 @@ python train.py --wandb_entity ma24m025-indian-institute-of-technology-madras --
 ```bash
 python train.py --wandb_entity ma24m025-indian-institute-of-technology-madras --wandb_project DA6401train-Project --dataset mnist --epochs 10 --batch_size 64 --optimizer nadam --learning_rate 0.001 --num_layers 3 --hidden_size 128 --activation tanh --weight_init Xavier --weight_decay 0.0 --beta1 0.9 --beta2 0.99
 ```
+### **Arguments to be supported**
+
+| Name | Default Value | Description |
+| :---: | :-------------: | :----------- |
+| `-wp`, `--wandb_project` | DA6401train-Project | Project name used to track experiments in Weights & Biases dashboard |
+| `-we`, `--wandb_entity` | ma24m025-indian-institute-of-technology-madras  | Wandb Entity used to track experiments in the Weights & Biases dashboard. |
+| `-d`, `--dataset` | fashion_mnist | choices:  ["mnist", "fashion_mnist"] |
+| `-e`, `--epochs` | 10 |  Number of epochs to train neural network.|
+| `-b`, `--batch_size` | 64 | Batch size used to train neural network. | 
+| `-l`, `--loss` | cross_entropy | choices:  ["mean_squared_error", "cross_entropy"] |
+| `-o`, `--optimizer` | adam | choices:  ["sgd", "momentum", "nag", "rmsprop", "adam", "nadam"] | 
+| `-lr`, `--learning_rate` | 0.001 | Learning rate used to optimize model parameters | 
+| `-m`, `--momentum` | 0.5 | Momentum used by momentum and nag optimizers. |
+| `-beta`, `--beta` | 0.5 | Beta used by rmsprop optimizer | 
+| `-beta1`, `--beta1` | 0.9 | Beta1 used by adam and nadam optimizers. | 
+| `-beta2`, `--beta2` | 0.99 | Beta2 used by adam and nadam optimizers. |
+| `-eps`, `--epsilon` | 0.000001 | Epsilon used by optimizers. |
+| `-w_d`, `--weight_decay` | 0.0 | Weight decay used by optimizers. |
+| `-w_i`, `--weight_init` | Xavier | choices:  ["random", "Xavier"] | 
+| `-nhl`, `--num_layers` | 3 | Number of hidden layers used in feedforward neural network. | 
+| `-sz`, `--hidden_size` | 128 | Number of hidden neurons in a feedforward layer. |
+| `-a`, `--activation` | ReLU | choices:  ["identity", "sigmoid", "tanh", "ReLU"] |
+
+<br>
