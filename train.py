@@ -25,7 +25,7 @@ def parse_args():
     parser.add_argument('-w_i', '--weight_init', choices = ['random', 'Xavier'], default = 'random', help = 'Weight initialization')
     parser.add_argument('-nhl', '--num_layers', type = int, default = 3, help = 'Number of hidden layers')
     parser.add_argument('-sz', '--hidden_size', type = int, default = 128, help = 'Hidden layer size')
-    parser.add_argument('-a', '--activation', choices = ['identity', 'sigmoid', 'tanh', 'ReLU'], default = 'sigmoid', help = 'Activation function')
+    parser.add_argument('-a', '--activation', choices = ['identity', 'sigmoid', 'tanh', 'ReLU'], default = 'ReLU', help = 'Activation function')
     parser.add_argument('-w_d', '--weight_decay',type = float, default = 0.0, help = "weight decay for L2 regurlarization")
     return parser.parse_args()
 
