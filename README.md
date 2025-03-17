@@ -1,4 +1,6 @@
 # DA6401 Assignment-1
+#### Detailed Weights & Biases Report for My Project: [Click Here](https://wandb.ai/ma24m025-indian-institute-of-technology-madras/MA24M025_DA6401_Project-1/reports/MA24M025_DA6401-Assignment-1-Report--VmlldzoxMTY5MDE0NQ)
+#### Github Link: [Click Here](https://github.com/dassrikrishna/da6401_assignment1)
 ## DEEP LEARNING
 #### ```SRIKRISHNA DAS (MA24M025)```
 #### `M.Tech (Industrial Mathematics and Scientific Computing) IIT Madras`
@@ -48,7 +50,7 @@ cd da6401_assignment1
 pip install -r requirements.txt
 ```
 ## **Project Structure**
-```
+```bash
 |-- train.py                         # Main script to train the neural network
 |-- reshape_data.py                  # Preprocessing: normalize, reshape, and one-hot encode
 |-- activation.py                    # Activation functions and their derivatives
@@ -161,7 +163,7 @@ python train.py --wandb_entity ma24m025-indian-institute-of-technology-madras --
 ```bash
 python train.py --wandb_entity ma24m025-indian-institute-of-technology-madras --wandb_project DA6401train-Project --dataset mnist --epochs 10 --batch_size 64 --optimizer nadam --learning_rate 0.001 --num_layers 3 --hidden_size 128 --activation tanh --weight_init Xavier --weight_decay 0.0 --beta1 0.9 --beta2 0.99
 ```
-### **Arguments to be supported**
+### **Supported Arguments**
 
 | Name | Default Value | Description |
 | :---: | :-------------: | :----------- |
