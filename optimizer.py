@@ -10,22 +10,20 @@ from taccuracy_confusion import compute_accuracy
 # minibatch gradient descent
 def minibatch_gd(X, Y, weights, biases, num_layers, learning_rate, epochs, batch_size, activation, loss_fun, weight_decay):
     samples_size = X.shape[0]
-    
-    # shuffle the dataset before splitting
-    indices = np.random.permutation(samples_size)
-    X, Y = X[indices], Y[indices]
-
-    # 10% data for validation
-    val_size = int(0.1 * samples_size)
-    X_val, Y_val = X[:val_size], Y[:val_size]  
-    X_train, Y_train = X[val_size:], Y[val_size:]
-
-    #losses = []
 
     for epoch in range(epochs):
+        # shuffle the dataset before splitting
+        indices = np.random.permutation(samples_size)
+        X, Y = X[indices], Y[indices]
+
+        # 10% data for validation
+        val_size = int(0.1 * samples_size)
+        X_val, Y_val = X[:val_size], Y[:val_size]  
+        X_train, Y_train = X[val_size:], Y[val_size:]
+
         # shuffle training data
-        indices = np.random.permutation(X_train.shape[0])
-        X_train, Y_train = X_train[indices], Y_train[indices]
+        train_indices = np.random.permutation(X_train.shape[0])
+        X_train, Y_train = X_train[train_indices], Y_train[train_indices]
 
         for i in range(0, X_train.shape[0], batch_size):
             X_batch = X_train[i:i + batch_size]
@@ -72,23 +70,22 @@ def minibatch_gd(X, Y, weights, biases, num_layers, learning_rate, epochs, batch
 def minibatch_mgd(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum, loss_fun, weight_decay):
     samples_size = X.shape[0]
     
-    # suffle the dataset before splitting
-    indices = np.random.permutation(samples_size)
-    X, Y = X[indices], Y[indices]
-
-    # 10% data for validation
-    val_size = int(0.1 * samples_size)
-    X_val, Y_val = X[:val_size], Y[:val_size]
-    X_train, Y_train = X[val_size:], Y[val_size:]
-    
     prev_uw = [np.zeros_like(w) for w in weights]
     prev_ub = [np.zeros_like(b) for b in biases]
-    #losses = []
 
     for epoch in range(epochs):
+        # shuffle the dataset before splitting
+        indices = np.random.permutation(samples_size)
+        X, Y = X[indices], Y[indices]
+
+        # 10% data for validation
+        val_size = int(0.1 * samples_size)
+        X_val, Y_val = X[:val_size], Y[:val_size]  
+        X_train, Y_train = X[val_size:], Y[val_size:]
+        
         # shuffle training data
-        indices = np.random.permutation(X_train.shape[0])
-        X_train, Y_train = X_train[indices], Y_train[indices]
+        train_indices = np.random.permutation(X_train.shape[0])
+        X_train, Y_train = X_train[train_indices], Y_train[train_indices]
 
         for i in range(0, X_train.shape[0], batch_size):
             X_batch = X_train[i:i + batch_size]
@@ -137,23 +134,22 @@ def minibatch_mgd(X, Y, weights, biases, num_layers, activation, learning_rate, 
 def minibatch_nag(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, momentum, loss_fun, weight_decay):
     samples_size = X.shape[0]
 
-    # shuffle dataset before splitting
-    indices = np.random.permutation(samples_size)
-    X, Y = X[indices], Y[indices]
-
-    # 10% data for validation
-    val_size = int(0.1 * samples_size)
-    X_val, Y_val = X[:val_size], Y[:val_size]
-    X_train, Y_train = X[val_size:], Y[val_size:]
-
     prev_vw = [np.zeros_like(w) for w in weights]
     prev_vb = [np.zeros_like(b) for b in biases]
-    #losses = []
 
     for epoch in range(epochs):
+        # shuffle the dataset before splitting
+        indices = np.random.permutation(samples_size)
+        X, Y = X[indices], Y[indices]
+
+        # 10% data for validation
+        val_size = int(0.1 * samples_size)
+        X_val, Y_val = X[:val_size], Y[:val_size]  
+        X_train, Y_train = X[val_size:], Y[val_size:]
+        
         # shuffle training data
-        indices = np.random.permutation(X_train.shape[0])
-        X_train, Y_train = X_train[indices], Y_train[indices]
+        train_indices = np.random.permutation(X_train.shape[0])
+        X_train, Y_train = X_train[train_indices], Y_train[train_indices]
 
         for i in range(0, X_train.shape[0], batch_size):
             X_batch = X_train[i:i + batch_size]
@@ -207,22 +203,22 @@ def minibatch_nag(X, Y, weights, biases, num_layers, activation, learning_rate, 
 def minibatch_rmsprop(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta, epsilon, loss_fun, weight_decay):
     samples_size = X.shape[0]
 
-    # shuffle dataset before splitting
-    indices = np.random.permutation(samples_size)
-    X, Y = X[indices], Y[indices]
-
-    # 10% data for validation
-    val_size = int(0.1 * samples_size)
-    X_val, Y_val = X[:val_size], Y[:val_size]
-    X_train, Y_train = X[val_size:], Y[val_size:]
-
     v_w = [np.zeros_like(w) for w in weights]
     v_b = [np.zeros_like(b) for b in biases]
-    #losses = []
 
     for epoch in range(epochs):
-        indices = np.random.permutation(X_train.shape[0])
-        X_train, Y_train = X_train[indices], Y_train[indices]
+        # shuffle the dataset before splitting
+        indices = np.random.permutation(samples_size)
+        X, Y = X[indices], Y[indices]
+
+        # 10% data for validation
+        val_size = int(0.1 * samples_size)
+        X_val, Y_val = X[:val_size], Y[:val_size]  
+        X_train, Y_train = X[val_size:], Y[val_size:]
+        
+        # shuffle training data
+        train_indices = np.random.permutation(X_train.shape[0])
+        X_train, Y_train = X_train[train_indices], Y_train[train_indices]
 
         for i in range(0, X_train.shape[0], batch_size):
             X_batch = X_train[i:i + batch_size]
@@ -273,24 +269,25 @@ def minibatch_rmsprop(X, Y, weights, biases, num_layers, activation, learning_ra
 def minibatch_adam(X, Y, weights, biases, num_layers, activation, learning_rate, epochs, batch_size, beta1, beta2, epsilon, loss_fun, weight_decay):
     samples_size = X.shape[0]
     t = 0 # step
-    # shuffle dataset before splitting
-    indices = np.random.permutation(samples_size)
-    X, Y = X[indices], Y[indices]
-
-    # 10% data for validation
-    val_size = int(0.1 * samples_size)
-    X_val, Y_val = X[:val_size], Y[:val_size]
-    X_train, Y_train = X[val_size:], Y[val_size:]
 
     m_w = [np.zeros_like(w) for w in weights]
     v_w = [np.zeros_like(w) for w in weights]
     m_b = [np.zeros_like(b) for b in biases]
     v_b = [np.zeros_like(b) for b in biases]
-    #losses = []
 
     for epoch in range(epochs):
-        indices = np.random.permutation(X_train.shape[0])
-        X_train, Y_train = X_train[indices], Y_train[indices]
+        # shuffle the dataset before splitting
+        indices = np.random.permutation(samples_size)
+        X, Y = X[indices], Y[indices]
+
+        # 10% data for validation
+        val_size = int(0.1 * samples_size)
+        X_val, Y_val = X[:val_size], Y[:val_size]  
+        X_train, Y_train = X[val_size:], Y[val_size:]
+        
+        # shuffle training data
+        train_indices = np.random.permutation(X_train.shape[0])
+        X_train, Y_train = X_train[train_indices], Y_train[train_indices]
 
         for i in range(0, X_train.shape[0], batch_size):
             X_batch = X_train[i:i + batch_size]
@@ -301,7 +298,7 @@ def minibatch_adam(X, Y, weights, biases, num_layers, activation, learning_rate,
 
             for x, y in zip(X_batch, Y_batch):
                 grads_W, grads_b = compute_grads(x, y, num_layers, weights, biases, activation, weight_decay)
-                
+
                 dw = grads_W
                 db = grads_b
             t +=1 # increment step
@@ -348,24 +345,24 @@ def minibatch_nadam(X, Y, weights, biases, num_layers, activation, learning_rate
     samples_size = X.shape[0]
     t = 0 # step
 
-    # shuffle dataset before splitting
-    indices = np.random.permutation(samples_size)
-    X, Y = X[indices], Y[indices]
-
-    # 10% data for validation
-    val_size = int(0.1 * samples_size)
-    X_val, Y_val = X[:val_size], Y[:val_size]
-    X_train, Y_train = X[val_size:], Y[val_size:]
-
     m_w = [np.zeros_like(w) for w in weights]
     v_w = [np.zeros_like(w) for w in weights]
     m_b = [np.zeros_like(b) for b in biases]
     v_b = [np.zeros_like(b) for b in biases]
-    #losses = []
 
     for epoch in range(epochs):
-        indices = np.random.permutation(X_train.shape[0])
-        X_train, Y_train = X_train[indices], Y_train[indices]
+        # shuffle the dataset before splitting
+        indices = np.random.permutation(samples_size)
+        X, Y = X[indices], Y[indices]
+
+        # 10% data for validation
+        val_size = int(0.1 * samples_size)
+        X_val, Y_val = X[:val_size], Y[:val_size]  
+        X_train, Y_train = X[val_size:], Y[val_size:]
+        
+        # shuffle training data
+        train_indices = np.random.permutation(X_train.shape[0])
+        X_train, Y_train = X_train[train_indices], Y_train[train_indices]
 
         for i in range(0, X_train.shape[0], batch_size):
             X_batch = X_train[i:i + batch_size]
@@ -376,7 +373,7 @@ def minibatch_nadam(X, Y, weights, biases, num_layers, activation, learning_rate
 
             for x, y in zip(X_batch, Y_batch):
                 grads_W, grads_b = compute_grads(x, y, num_layers, weights, biases, activation, weight_decay)
-
+                
                 dw = grads_W
                 db = grads_b
 
