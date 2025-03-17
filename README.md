@@ -23,8 +23,8 @@ A **```train.py```** script must be implemented to allow command-line configurat
 Your submission should include:  
 - A **GitHub repository** with all required code.  
 - A **wandb report** summarizing experiments and findings.  
-- A **Gradescope submission** linking to the project.
-#### Detailed Weights & Biases Report for My Project: [HERE](https://wandb.ai/ma24m025-indian-institute-of-technology-madras/MA24M025_DA6401_Project-1/reports/MA24M025_DA6401-Assignment-1-Report--VmlldzoxMTY5MDE0NQ)
+
+#### Detailed Weights & Biases Report for My Project: [Click Here](https://wandb.ai/ma24m025-indian-institute-of-technology-madras/MA24M025_DA6401_Project-1/reports/MA24M025_DA6401-Assignment-1-Report--VmlldzoxMTY5MDE0NQ)
 
 ## **Table of Contents**
 - [Installation](#installation)
