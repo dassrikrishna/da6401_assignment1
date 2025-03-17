@@ -35,7 +35,7 @@ Your submission should include:
    - [Optimization and Performance Evaluation](#optimization-and-performance-evaluation)
    - [Evaluation and Experimentation](#evaluation-and-experimentation)
      
-- [Training Script (`train.py`)](#training-script-trainpy)
+- [Training Script (train.py)](#training-script-trainpy)
   
   - [Usage Examples](#usage-examples)
   - [Arguments to be supported](#arguments-to-be-supported)
@@ -118,7 +118,7 @@ pip install -r requirements.txt
     - Activation function: "sigmoid", "tanh", "ReLU"
   - Runs sweeps and evaluates test accuracy and confusion matrix for each experiment.
     
-## **Training Script (`train.py`)**  
+## **Training Script (train.py)**  
 - Implements the **main training pipeline** for the feedforward neural network.  
 - Supports **command-line configuration** using `argparse` for flexible training options.  
 - Integrates with **Weights & Biases (`wandb`)** for logging hyperparameters, loss, and accuracy.  
